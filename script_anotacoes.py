@@ -1,10 +1,12 @@
-from Bio.Seq import Seq
-from Bio.Alphabet import IUPAC
-from Bio.SeqRecord import SeqRecord
 from Bio import SeqIO
-from Bio.Blast import NCBIWWW
 
 seq_record = SeqIO.read('genes.gb', 'gb')
+seq_gene = open('anotacoes_genes.txt', 'w')
+seq_cds = open('anotacoes_CDS.txt', 'w')
 for feature in seq_record.features:
-    if (feature.type == 'gene' or feature.type == 'CDS'):
-        print feature
+    if feature.type == 'gene':
+        seq_gene.write(str(feature) + '\n')
+    elif feature.type == 'CDS':
+        seq_cds.write(str(feature) + '\n')
+seq_gene.close()
+seq_cds.close()
