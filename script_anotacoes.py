@@ -33,7 +33,7 @@ seq_cds.close()
 seq_outras.close()
 
 #validação de features de acordo com a tabela fornecida no enunciado (código baseado no desenvolvido pelo grupo 7)
-f = open("ProteinTable416_166758.txt", 'r')
+f = open("ProteinTable416_166758.txt", 'r')#tabela retirada de http://www.ncbi.nlm.nih.gov/genome/proteins/416?genome_assembly_id=166758
 table=[]
 for line in f.readlines():
     table.append(line.split('\t'))
@@ -55,11 +55,11 @@ for i in xrange(3148911, len(table)):
 valid = open('analise_validacao.txt', 'w')
 valid.write('Analise das features \n')
 valid.write('Numero de genes: ' + str(len(genes)))
-valid.write('Locais: ' + str(genes))
+valid.write(' Locais: ' + str(genes) + '\n')
 valid.write('Numero de CDS: ' + str(len(cds)))
-valid.write('Locais: ' + str(cds))
+valid.write(' Locais: ' + str(cds) + '\n')
 valid.write('Numero de outras features: ' + str(len(outras)))
-valid.write('Locais: ' + str(outras))
+valid.write(' Locais: ' + str(outras))
 valid.write('\n Validacao: ')
 if valido:
     valid.write('Todas as features foram validadas com sucesso')
