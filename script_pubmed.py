@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Dec 20 12:20:15 2014
+
+@author: gabriel
+"""
+
 from Bio import Entrez
 from Bio import Medline
 
