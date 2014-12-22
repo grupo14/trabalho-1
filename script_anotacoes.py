@@ -32,7 +32,7 @@ seq_gene.close()
 seq_cds.close()
 seq_outras.close()
 
-#validação de features de acordo com a tabela fornecida no enunciado (código baseado no desenvolvido pelo grupo 7)
+#validação de features de acordo com a tabela fornecida no enunciado (baseado no código desenvolvido pelo grupo 7)
 f = open("ProteinTable416_166758.txt", 'r')#tabela retirada de http://www.ncbi.nlm.nih.gov/genome/proteins/416?genome_assembly_id=166758
 table=[]
 for line in f.readlines():
