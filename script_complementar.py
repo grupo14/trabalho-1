@@ -28,8 +28,8 @@ complement.write("Gene e funcao: \n")
 complement.write("Genes com funcao definida: " + str(len(funcoes)))
 complement.write("\nGenes com funcao desconhecida: " + str(210-len(funcoes))+ "\n")
 for funcao in funcoes:
-    complement.write(str(funcao))
+    complement.write(str(funcao) + '\n')
 complement.write("\n Gene e traducao: \n")
 for protein in traducao:
-    complement.write(str(protein))
+    complement.write(str(protein) + '\n')
 complement.close()
