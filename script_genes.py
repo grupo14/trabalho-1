@@ -20,7 +20,7 @@ seq_record = SeqIO.read(handle, 'gb')
 handle.close()
 SeqIO.write(seq_record, 'genes.gb', 'gb')
 
-#guardar informação relevante sobre a sequência selecionada (baseada no código do grupo 7)
+#guardar informação relevante sobre a sequência selecionada (baseado no código desenvolvido pelo grupo 7)
 intel = open('informacao_sequencia.txt', 'w')
 intel.write('Registo NCBI')
 intel.write('\n')
