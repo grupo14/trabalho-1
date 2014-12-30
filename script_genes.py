@@ -11,7 +11,7 @@ Created on Sun Dec 14 17:07:30 2014
 from Bio import SeqIO
 from Bio import Entrez
 
-#abrir a sequência selecionada para o nosso grupo (genes lpg2796 a lpg3005)
+#abrir a sequência selecionada para o nosso grupo (genes lpg2796 a lpg3005; posições 3148911 a 3397754)
 Entrez.email = "gabrielpeixoto@sapo.pt"#o e-mail é apenas um exemplo
 handle = Entrez.efetch(db='nucleotide', rettype='gb', retmode='txt', id='NC_002942.5', seq_start=3148911, seq_stop=3397754)
 
