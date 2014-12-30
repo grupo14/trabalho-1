@@ -22,7 +22,7 @@ for feature in record.features:
     if feature.type=="CDS":
         traducao.append((feature.qualifiers["locus_tag"][0], feature.qualifiers["translation"][0]))
 
-#ImprimirInformacaoRelevante
+#imprimir informação relevante
 complement = open('informacao_complementar.txt', 'w')
 complement.write("Gene e funcao: \n")
 complement.write("Genes com funcao definida: " + str(len(funcoes)))
