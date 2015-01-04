@@ -70,3 +70,37 @@ for code in codes:
              break
 
 #análise da estrutura das proteínas relevantes com base no PDB (código baseado no desenvolvido pelo grupo 10)
+parser = PDBParser()
+a = "SIM"
+while a == "SIM":
+    s = raw_input ("Nome do ficheiro a analisar:")
+    ficheiro= open("Resultados da %s"%s, "w")
+    structure = parser.get_structure('%s'%s, '%s.pdb'%s)
+    pdbl = PDBList()
+    pdbl.retrieve_pdb_file('%s'%s)
+    print "\nAnalise do ficheiro: %s"%(s)
+    keywords = structure.header['keywords']
+    ficheiro.write(keywords)
+    print "\nPalavras Chave:%s"%keywords
+    name = structure.header['name']
+    print "\nNome do Organismo:%s"%name
+    head = structure.header['head']
+    print "\nCabecalho:%s"%head
+    dep = structure.header['deposition_date']
+    print "\nData da deposicao::%s"%dep
+    dat = structure.header['release_date']
+    print "\nData da publicacaos::%s"%dat
+    s = structure.header['structure_method']
+    print "\nMetodo usado:%s"%s
+    resolution = structure.header['resolution']
+    print "\nResolucao:%s"%resolution
+    ref = structure.header['structure_reference']
+    print "\nReferencia da estrutura:%s"%ref
+    j = structure.header['journal_reference']
+    print "\nReferencia de artigo:%s"%j
+    a = structure.header['author']
+    print "\nAutor:%s"%a
+    c = structure.header['compound']
+    print "\nComposto:%s\n"%c
+    w = raw_input ("Existe mais algum ficheiro que deseje analisar( responda sim ou nao):")
+    a = w.upper()
