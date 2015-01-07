@@ -21,17 +21,16 @@ number = 0
 for row in record["eGQueryResult"]:
     if row["DbName"]=="pubmed":
         number = row["Count"]
-handle = Entrez.esearch(db = "pubmed", term = "Legionella  pneumophila philadelphia 1", retmax=number)
-record = Entrez.read(handle)
-idlist = record["IdList"]
-handle = Entrez.efetch(db="pubmed", id=idlist, rettype="medline", retmode="text")
-records = list(Medline.parse(handle))
-for record in records:
-    record_results.write("title: ")
-    record_results.write(str(record.get("TI", "?")))
-    record_results.write("\nauthors: ")
-    record_results.write(str(record.get("AU", "?")))
-    record_results.write("\nsource: ")
-    record_results.write(str(record.get("SO", "?")))
-    record_results.write("\n\n")
+for feature in seq_record.features:
+    if (feature.type == 'gene' and feature.qualifiers.has_key('gene') == False) or (feature.type == 'CDS' and feature.qualifiers['product'] == 'hypothetical protein'):
+        handle = Entrez.esearch(db = "pubmed", term = "Legionella  pneumophila philadelphia 1 %s" %feature.qualifiers['locus_tag'], retmax = number)
+        record = Entrez.read(handle)
+        idlist = record["IdList"]
+        handle = Entrez.efetch(db="pubmed", id=idlist, rettype="medline", retmode="text")
+        records = list(Medline.parse(handle))
+        record_results.write("\n****%s****\n" %feature.qualifiers['locus_tag'])
+        for record in records:
+            record_results.write("title: %s\n" %record.get("TI", "?"))
+            record_results.write("\nauthors: %s\n" %record.get("AU", "?"))
+            record_results.write("\nsource: %s\n\n" %record.get("SO", "?"))
 record_results.close()
