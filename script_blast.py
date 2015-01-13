@@ -15,28 +15,26 @@ from Bio import SeqIO
 from Bio.Blast import NCBIWWW
 from Bio.Blast import NCBIXML 
 
-#registo do GI das proteinas resultantes da sequência selecionada
+#registo do GI da proteína resultante de um gene da sequência selecionada
 seq_record = SeqIO.read('genes.gb', 'gb')
-proteins = []
+gene = raw_input("Introduza o locus_tag do gene a pesquisar: ")
 for feature in seq_record.features:
-    if feature.type == "CDS":
-        seq_protein = Seq(str(feature.qualifiers['translation']), IUPAC.extended_protein)
+    if feature.type == "CDS" and feature.qualifiers['locus_tag'] == ['%s' %gene]:
+        seq_protein = Seq(str(feature.qualifiers['translation'][-2:-2]), IUPAC.extended_protein)
         protein_record = SeqRecord(seq_protein)
-        proteins.append(protein_record)
 
 #execução do blast
-save_file = open('blast.xml', 'w')
-for protein in proteins:
-    result_handle = NCBIWWW.qblast('blastp', 'swissprot', protein.format('gb'))
-    save_file.write(result_handle.read())
-    save_file.write('\n\n')
+save_file = open('blast_%s.xml' %gene, 'w')
+result_handle = NCBIWWW.qblast('blastp', 'swissprot', protein_record.format('gb'))
+save_file.write(result_handle.read())
+save_file.write('\n\n')
 save_file.close()
 result_handle.close()
 
 #verificação dos resultados (baseado no código desenvolvido pelo grupo 1)
-verify = open('blast_verificacao.txt', 'w')
+verify = open('blast_%s_verificacao.txt' %gene, 'w')
 E_VALUE_THRESH = 0.1
-result = open('blast.xml','r')
+result = open('blast_%s.xml' %gene,'r')
 records = NCBIXML.parse(result)
 for record in records:
     for alignment in record.alignments:
